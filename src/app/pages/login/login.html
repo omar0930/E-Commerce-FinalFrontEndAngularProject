@@ -1,0 +1,103 @@
+<section>
+  <h2 class="text-4xl text-center my-3 text-green-600">Login Now</h2>
+  <form
+    class="w-[80%] mx-auto p-5"
+    [formGroup]="loginForm"
+    (ngSubmit)="submit()"
+  >
+    @if(errorMsg){
+    <div
+      class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+      role="alert"
+    >
+      <p>{{ errorMsg }}</p>
+    </div>
+    }
+    <div class="mb-2">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
+        >Email :</label
+      >
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+      />
+      @if(loginForm.controls['email'].errors&&loginForm.controls['email'].touched){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(loginForm.controls['email'].hasError('required')){
+            <li>Email Is Required</li>
+            } @if(loginForm.controls['email'].hasError('email')){
+            <li>Email is invalid</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mb-2">
+      <label for="password" class="block mb-2 text-sm font-medium text-gray-900"
+        >Password :</label
+      >
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+      />
+      @if(loginForm.controls['password'].errors&&loginForm.controls['password'].touched){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(loginForm.controls['password'].hasError('required')){
+            <li>Password Is Required</li>
+            } @if(loginForm.controls['password'].hasError('minlength')){
+            <li>At Least 6 character</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <button class="main-btn mt-3" type="submit" [disabled]="isLoading">
+      Login @if(isLoading){<span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span
+      >}
+    </button>
+  </form>
+</section>

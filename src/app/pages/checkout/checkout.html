@@ -1,0 +1,121 @@
+<section class="bg-gray-200 p-10 my-14 md:w-1/2 mx-auto shadow">
+  <h1 class="text-center text-4xl my-3">CheckOut</h1>
+
+  <form [formGroup]="checkOutForm" (ngSubmit)="submitForm()">
+    <div formGroupName="shippingAddress">
+      <!-- Details Field -->
+      <div class="mb-4">
+        <label
+          for="details"
+          class="block mb-2 text-sm font-medium text-gray-900"
+        >
+          Details:
+        </label>
+        <input
+          formControlName="details"
+          type="text"
+          id="details"
+          class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+          placeholder="Enter shipping details"
+        />
+        @if(ship.details.touched && ship.details.invalid){
+        <div
+          class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50"
+          role="alert"
+        >
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(ship.details.hasError('required')){
+            <li>Details are required</li>
+            }
+          </ul>
+        </div>
+        }
+      </div>
+
+      <!-- Phone Field -->
+      <div class="mb-4">
+        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">
+          Phone:
+        </label>
+        <input
+          formControlName="phone"
+          type="tel"
+          id="phone"
+          inputmode="numeric"
+          dir="ltr"
+          maxlength="11"
+          class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+          placeholder="Enter phone number e.g. 01012345678"
+        />
+        @if(ship.phone.touched && ship.phone.invalid){
+        <div
+          class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50"
+          role="alert"
+        >
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(ship.phone.hasError('required')){
+            <li>Phone is required</li>
+            } @if(ship.phone.hasError('pattern')){
+            <li>Enter a valid Egyptian mobile (010/011/012/015 + 8 digits)</li>
+            }
+          </ul>
+        </div>
+        }
+      </div>
+
+      <!-- City Field -->
+      <div class="mb-4">
+        <label for="city" class="block mb-2 text-sm font-medium text-gray-900">
+          City:
+        </label>
+        <input
+          formControlName="city"
+          type="text"
+          id="city"
+          class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+          placeholder="Enter city"
+        />
+        @if(ship.city.touched && ship.city.invalid){
+        <div
+          class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50"
+          role="alert"
+        >
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(ship.city.hasError('required')){
+            <li>City is required</li>
+            }
+          </ul>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Payment Buttons -->
+    <div class="flex gap-4 mt-6">
+      <button
+        type="submit"
+        [disabled]="checkOutForm.invalid || isProcessing"
+        class="cursor-pointer flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        Payment by Visa @if(isProcessing){<span
+          class="spinner-border spinner-border-sm"
+          aria-hidden="true"
+        ></span
+        >}
+      </button>
+
+      <button
+        type="button"
+        (click)="paymentByCash()"
+        [disabled]="checkOutForm.invalid || isProcessing"
+        class="cursor-pointer flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        Payment by Cash @if(isProcessing){<span
+          class="spinner-border spinner-border-sm"
+          aria-hidden="true"
+        ></span
+        >}
+      </button>
+    </div>
+  </form>
+</section>

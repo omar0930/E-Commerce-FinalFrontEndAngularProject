@@ -1,0 +1,227 @@
+<nav class="bg-white shadow-lg border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo Section -->
+      <div class="flex-shrink-0">
+        <a routerLink="/home" class="flex items-center space-x-2">
+          <img
+            src="/images/freshcart-logo.svg"
+            alt="FreshCart"
+            class="h-8 w-auto"
+          />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation (Center) -->
+      <div class="hidden md:flex flex-1 justify-center">
+        @if(isLogin) {
+        <div class="flex items-center space-x-1">
+          <a
+            routerLink="/home"
+            routerLinkActive="bg-green-100 text-green-700"
+            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
+          >
+            Home
+          </a>
+          <a
+            routerLink="/brands"
+            routerLinkActive="bg-green-100 text-green-700"
+            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
+          >
+            Brands
+          </a>
+          <a
+            routerLink="/category"
+            routerLinkActive="bg-green-100 text-green-700"
+            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
+          >
+            Categories
+          </a>
+          <a
+            routerLink="/products"
+            routerLinkActive="bg-green-100 text-green-700"
+            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
+          >
+            Products
+          </a>
+        </div>
+        }
+      </div>
+
+      <!-- Right Section - User Actions -->
+      <div class="flex items-center space-x-2">
+        <!-- Auth Links (when logged out) -->
+        @if(!isLogin) {
+        <div class="hidden md:flex items-center space-x-2 mr-4">
+          <a
+            routerLink="/login"
+            routerLinkActive="bg-green-100 text-green-700"
+            class="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200"
+          >
+            Login
+          </a>
+          <a
+            routerLink="/register"
+            routerLinkActive="bg-green-100 text-green-700"
+            class="px-4 py-2 rounded-lg text-sm font-medium bg-green-600 text-white hover:bg-green-700 transition-colors duration-200"
+          >
+            Register
+          </a>
+        </div>
+        }
+
+        <!-- Cart & User Actions (when logged in) -->
+        @if(isLogin) {
+        <div class="flex items-center space-x-1">
+          <!-- Cart Icon -->
+          <a
+            routerLink="/cart"
+            routerLinkActive="text-green-600"
+            class="p-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-green-600 transition-colors duration-200 relative"
+            title="Shopping Cart"
+          >
+            <i class="fa fa-shopping-cart text-lg"></i>
+          </a>
+
+          <!-- Logout Button -->
+          <button
+            (click)="signOut()"
+            class="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors duration-200"
+            title="Logout"
+          >
+            <i class="fa fa-sign-out-alt mr-1"></i>
+            <span class="hidden sm:inline">Logout</span>
+          </button>
+        </div>
+        }
+
+        <!-- Social Links -->
+        <div
+          class="flex items-center space-x-1 border-l border-gray-200 pl-3 ml-3"
+        >
+          <a
+            href="https://www.facebook.com/Omar251"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-lg text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+            title="Facebook"
+          >
+            <i class="fab fa-facebook text-lg"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ommar10"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2 rounded-lg text-gray-500 hover:text-blue-700 hover:bg-blue-50 transition-colors duration-200"
+            title="LinkedIn"
+          >
+            <i class="fab fa-linkedin text-lg"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          (click)="toggleMobileMenu()"
+          type="button"
+          class="md:hidden inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 ml-3"
+          aria-controls="navbar-mobile"
+          [attr.aria-expanded]="isMobileMenuOpen"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="md:hidden" id="navbar-mobile" [class.show]="isMobileMenuOpen">
+      <div class="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200 bg-white">
+        <!-- Mobile Navigation Links (when logged in) -->
+        @if(isLogin) {
+        <a
+          routerLink="/home"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-green-100 text-green-700"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        >
+          Home
+        </a>
+        <a
+          routerLink="/brands"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-green-100 text-green-700"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        >
+          Brands
+        </a>
+        <a
+          routerLink="/category"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-green-100 text-green-700"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        >
+          Categories
+        </a>
+        <a
+          routerLink="/products"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-green-100 text-green-700"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        >
+          Products
+        </a>
+
+        <!-- Mobile Cart Link -->
+        <a
+          routerLink="/cart"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-green-100 text-green-700"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        >
+          <i class="fa fa-shopping-cart mr-2"></i>Cart
+        </a>
+
+        <!-- Mobile Logout -->
+        <button
+          (click)="signOut()"
+          class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-red-50"
+        >
+          <i class="fa fa-sign-out-alt mr-2"></i>Logout
+        </button>
+        }
+
+        <!-- Mobile Auth Links (when logged out) -->
+        @if(!isLogin) {
+        <a
+          routerLink="/login"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-green-100 text-green-700"
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+        >
+          Login
+        </a>
+        <a
+          routerLink="/register"
+          (click)="closeMobileMenu()"
+          routerLinkActive="bg-green-100 text-green-700"
+          class="block px-3 py-2 rounded-md text-base font-medium bg-green-600 text-white hover:bg-green-700"
+        >
+          Register
+        </a>
+        }
+      </div>
+    </div>
+  </div>
+</nav>

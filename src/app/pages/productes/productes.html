@@ -1,0 +1,63 @@
+<section class="products my-5">
+  <h2 class="text-3xl mb-4">products List</h2>
+  <input
+    [(ngModel)]="Text"
+    type="search"
+    placeholder="Search Products"
+    class="border border-green-600 block w-1/2 mx-auto my-10"
+  />
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
+  >
+    @for(product of productsList | paginate: { id: 'foo', itemsPerPage:
+    pageSize, currentPage: p, totalItems: total } | search: Text ; track
+    $index){
+
+    <div
+      class="card w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div
+        [routerLink]="['/details', product.id]"
+        class="cursor-pointer card-img"
+      >
+        <img
+          [src]="product.imageCover"
+          class="w-full"
+          alt="product image"
+          class="rounded-t-lg w-full h-60 object-contain p-3 bg-white"
+        />
+      </div>
+      <div class="card-body p-5">
+        <a>
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            {{ product.title }}
+          </h5>
+        </a>
+        <p
+          class="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-2"
+        >
+          {{ product.description }}
+        </p>
+      </div>
+      <button
+        (click)="addProductItemToCart(product.id)"
+        class="cursor-pointer bg-green-600 text-white w-[90%] block mx-auto py-4 mb-4 rounded-md"
+      >
+        Add To Cart
+      </button>
+    </div>
+
+    }
+  </div>
+
+  <div class="flex justify-center mt-8">
+    <pagination-controls
+      class="my-pagination"
+      id="foo"
+      (pageChange)="getProducts($event)"
+    >
+    </pagination-controls>
+  </div>
+</section>

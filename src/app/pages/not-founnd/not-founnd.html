@@ -1,0 +1,30 @@
+<!-- Full screen container with white background -->
+<div class="min-h-screen grid place-items-center bg-white">
+  <div class="text-center p-6">
+    <!-- Centered error image -->
+    <img
+      src="/images/error.svg"
+      alt="Page not found"
+      class="mx-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg select-none"
+      draggable="false"
+    />
+
+    <!-- Heading -->
+    <h1 class="mt-6 text-2xl sm:text-3xl font-semibold text-gray-900">
+      Oops! Page not found
+    </h1>
+
+    <!-- Subtext -->
+    <p class="mt-2 text-gray-600">
+      The page you’re looking for doesn’t exist or has been moved.
+    </p>
+
+    <!-- Back to Home button -->
+    <a
+      routerLink="/home"
+      class="cursor-pointer inline-block mt-5 px-5 py-2 rounded-2xl bg-gray-900 text-white hover:opacity-90 transition"
+    >
+      Back to Home
+    </a>
+  </div>
+</div>

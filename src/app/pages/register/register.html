@@ -1,0 +1,242 @@
+<section>
+  <h2 class="text-4xl text-center my-3 text-green-600">Register Now</h2>
+  <form
+    class="w-[80%] mx-auto p-5"
+    [formGroup]="registerForm"
+    (ngSubmit)="submit()"
+  >
+    @if(errorMsg){
+    <div
+      class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+      role="alert"
+    >
+      <p>{{ errorMsg }}</p>
+    </div>
+    }
+    <div class="mb-2">
+      <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
+        >Name :</label
+      >
+      <input
+        formControlName="name"
+        type="text"
+        id="name"
+        class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+      />
+      @if(registerForm.controls['name'].errors&&registerForm.controls['name'].touched){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(registerForm.controls['name'].hasError('required')){
+            <li>Name Is Required</li>
+            } @if(registerForm.controls['name'].hasError('minlength')){
+            <li>At Least 3 character</li>
+            } @if(registerForm.controls['name'].hasError('maxlength')){
+            <li>Max 20 character</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mb-2">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
+        >Email :</label
+      >
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+      />
+      @if(registerForm.controls['email'].errors&&registerForm.controls['email'].touched){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(registerForm.controls['email'].hasError('required')){
+            <li>Email Is Required</li>
+            } @if(registerForm.controls['email'].hasError('email')){
+            <li>Email is invalid</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mb-2">
+      <label
+        for="password"
+        class="block mb-2 text-sm font-medium text-gray-900"
+      >
+        Password :
+      </label>
+
+      <div class="relative">
+        <input
+          formControlName="password"
+          [type]="flag ? 'password' : 'text'"
+          id="password"
+          class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5 pr-12"
+        />
+
+        <button
+          type="button"
+          (click)="flag = !flag"
+          class="absolute inset-y-0 right-3 my-auto cursor-pointer flex items-center justify-center"
+          aria-label="Toggle password visibility"
+        >
+          <i class="fa fa-eye" *ngIf="flag"></i>
+          <i class="fa fa-eye-slash" *ngIf="!flag"></i>
+        </button>
+      </div>
+
+      @if(registerForm.controls['password'].errors&&registerForm.controls['password'].touched){
+      <div
+        class="flex p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(registerForm.controls['password'].hasError('required')){
+            <li>Password Is Required</li>
+            } @if(registerForm.controls['password'].hasError('minlength')){
+            <li>At Least 6 character</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="mb-2">
+      <label
+        for="repassword"
+        class="block mb-2 text-sm font-medium text-gray-900"
+        >rePassword :</label
+      >
+      <input
+        formControlName="rePassword"
+        type="password"
+        id="repassword"
+        class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+      />
+      @if(registerForm.controls['rePassword'].errors&&registerForm.controls['rePassword'].touched){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(registerForm.controls['rePassword'].hasError('required')){
+            <li>rePassword Is Required</li>
+            } @if(registerForm.controls['rePassword'].hasError('mustMatch')){
+            <li>Passwords do not match</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="mb-2">
+      <label for="phone" class="block mb-2 text-sm font-medium text-gray-900"
+        >phone :</label
+      >
+      <input
+        formControlName="phone"
+        type="tel"
+        id="phone"
+        class="border border-gray-300 text-gray-900 text-sm rounded focus:ring-0 focus:border-gray-300 block w-full p-2.5"
+      />
+      @if(registerForm.controls['phone'].errors&&registerForm.controls['phone'].touched){
+      <div
+        class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+        role="alert"
+      >
+        <svg
+          class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Danger</span>
+        <div>
+          <ul class="mt-1.5 list-disc list-inside">
+            @if(registerForm.controls['phone'].hasError('required')){
+            <li>Phone Is Required</li>
+            } @if(registerForm.controls['phone'].hasError('pattern')){
+            <li>Phone is invalid</li>
+            }
+          </ul>
+        </div>
+      </div>
+      }
+    </div>
+    <button class="main-btn mt-3" type="submit" [disabled]="isLoading">
+      Register @if(isLoading){<span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span
+      >}
+    </button>
+  </form>
+</section>
